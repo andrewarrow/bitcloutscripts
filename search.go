@@ -17,11 +17,16 @@ func HandleSearch() {
 		table = argMap["table"]
 	}
 
+	degrees := argMap["degrees"]
+	if degrees == "" {
+		degrees = "2"
+	}
+
 	if table == "posts" {
 		lib.SearchSqlitePosts(query)
 	} else if table == "users" {
 		lib.SearchSqliteUsers(query)
 	} else if table == "follow" {
-		lib.SearchSqliteFollow("", query)
+		lib.SearchSqliteFollow("", query, degrees)
 	}
 }
