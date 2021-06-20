@@ -32,7 +32,7 @@ On linux it is:
 
 ~/.config/bitclout/bitclout/MAINNET/badgerdb
 
-Once you have let that run for ~24 hours or so:
+Let that run for ~24 hours or so, then:
 
 ```
 mkdir ~/acopy
