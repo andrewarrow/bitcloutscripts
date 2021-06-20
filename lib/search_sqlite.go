@@ -4,6 +4,8 @@ import (
 	"fmt"
 )
 
+var alreadyDone = map[string]bool{}
+
 func SearchSqliteFollow(tab, s string) {
 	pub58 := SearchSqliteUsername(s)
 	db := OpenSqliteDB()
@@ -20,7 +22,11 @@ func SearchSqliteFollow(tab, s string) {
 		rows.Scan(&follower)
 		username := SearchSqlitePub58(follower)
 		fmt.Printf("%s%s\n", tab, username)
-		SearchSqliteFollow("  ", username)
+		if alreadyDone[username] {
+			break
+		}
+		alreadyDone[username] = true
+		SearchSqliteFollow(tab+"  ", username)
 	}
 }
 func SearchSqlitePosts(s string) {

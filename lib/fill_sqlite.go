@@ -31,6 +31,7 @@ func EnumerateKeysFillSqliteFollows(sdb *sql.DB, db *badger.DB, dbPrefix []byte)
 		prefix := dbPrefix
 
 		i := 0
+		j := 0
 		for nodeIterator.Seek(prefix); nodeIterator.ValidForPrefix(prefix); nodeIterator.Next() {
 			key := nodeIterator.Item().Key()
 			follower := key[1:34]
@@ -38,8 +39,9 @@ func EnumerateKeysFillSqliteFollows(sdb *sql.DB, db *badger.DB, dbPrefix []byte)
 			InsertFollowee(sdb, base58.Encode(followed), base58.Encode(follower))
 			i++
 			if i%1000 == 0 {
+				j++
 				fmt.Println("iteration", i)
-				if Testing {
+				if Testing && j > 100 {
 					break
 				}
 			}
@@ -58,6 +60,7 @@ func EnumerateKeysFillSqlitePosts(sdb *sql.DB, db *badger.DB, dbPrefix []byte) {
 		prefix := dbPrefix
 
 		i := 0
+		j := 0
 		for nodeIterator.Seek(prefix); nodeIterator.ValidForPrefix(prefix); nodeIterator.Next() {
 			val, _ := nodeIterator.Item().ValueCopy(nil)
 
@@ -66,8 +69,9 @@ func EnumerateKeysFillSqlitePosts(sdb *sql.DB, db *badger.DB, dbPrefix []byte) {
 			InsertPost(db, sdb, post)
 			i++
 			if i%1000 == 0 {
+				j++
 				fmt.Println("iteration", i)
-				if Testing {
+				if Testing && j > 100 {
 					break
 				}
 			}
@@ -85,6 +89,7 @@ func EnumerateKeysFillSqliteUsers(sdb *sql.DB, db *badger.DB, dbPrefix []byte) {
 		prefix := dbPrefix
 
 		i := 0
+		j := 0
 		for nodeIterator.Seek(prefix); nodeIterator.ValidForPrefix(prefix); nodeIterator.Next() {
 			val, _ := nodeIterator.Item().ValueCopy(nil)
 
@@ -94,8 +99,9 @@ func EnumerateKeysFillSqliteUsers(sdb *sql.DB, db *badger.DB, dbPrefix []byte) {
 			InsertUser(sdb, profile)
 			i++
 			if i%1000 == 0 {
+				j++
 				fmt.Println("iteration", i)
-				if Testing {
+				if Testing && j > 100 {
 					break
 				}
 			}
