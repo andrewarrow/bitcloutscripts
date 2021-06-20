@@ -6,6 +6,8 @@ bitcloutscripts $ ./bcs
 
   bcs posts       # print all posts
   bcs graph       # make clout.gv graph file
+  bcs sqlite      # place clouts into local sqlite database
+  bcs search      # search sqlite database
 
 bitcloutscripts $ ./bcs posts --dir=/Users/aa/acopy/badgerdb
 ```
