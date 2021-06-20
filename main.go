@@ -33,6 +33,8 @@ func main() {
 		HandleGraph()
 	} else if command == "posts" {
 		HandlePosts()
+	} else if command == "search" {
+		HandleSearch()
 	} else if command == "sqlite" {
 		HandleSqlite()
 	} else {
