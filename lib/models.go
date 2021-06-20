@@ -9,6 +9,14 @@ type BlockHash [HashSizeBytes]byte
 type StakeEntry struct {
 }
 
+func (b *BlockHash) Bytes() []byte {
+	items := []byte{}
+	for _, val := range b {
+		items = append(items, val)
+	}
+	return items
+}
+
 type PostEntry struct {
 	PostHash                 *BlockHash
 	PosterPublicKey          []byte

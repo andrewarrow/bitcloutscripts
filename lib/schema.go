@@ -21,7 +21,10 @@ func CreateSchema() {
 	defer db.Close()
 
 	sqlStmt := `
-create table posts (body text, created_at datetime);
+create table posts (hash, body text, created_at datetime);
+
+CREATE UNIQUE INDEX posts_hash_idx
+  ON posts (hash);
 `
 	_, err := db.Exec(sqlStmt)
 	if err != nil {
