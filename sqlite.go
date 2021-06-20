@@ -8,5 +8,8 @@ func HandleSqlite() {
 		return
 	}
 	lib.CreateSchema()
+	if argMap["testing"] != "" {
+		lib.Testing = true
+	}
 	lib.FillSqlite(dir)
 }

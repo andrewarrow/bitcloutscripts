@@ -10,6 +10,8 @@ import (
 	"github.com/dgraph-io/badger/v3"
 )
 
+var Testing bool
+
 func FillSqlite(dir string) {
 	db, _ := badger.Open(badger.DefaultOptions(dir))
 	defer db.Close()
@@ -37,6 +39,9 @@ func EnumerateKeysFillSqliteFollows(sdb *sql.DB, db *badger.DB, dbPrefix []byte)
 			i++
 			if i%1000 == 0 {
 				fmt.Println("iteration", i)
+				if Testing {
+					break
+				}
 			}
 		}
 		return nil
@@ -62,6 +67,9 @@ func EnumerateKeysFillSqlitePosts(sdb *sql.DB, db *badger.DB, dbPrefix []byte) {
 			i++
 			if i%1000 == 0 {
 				fmt.Println("iteration", i)
+				if Testing {
+					break
+				}
 			}
 		}
 		return nil
@@ -87,6 +95,9 @@ func EnumerateKeysFillSqliteUsers(sdb *sql.DB, db *badger.DB, dbPrefix []byte) {
 			i++
 			if i%1000 == 0 {
 				fmt.Println("iteration", i)
+				if Testing {
+					break
+				}
 			}
 		}
 		return nil

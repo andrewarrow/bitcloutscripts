@@ -6,6 +6,7 @@ import (
 
 func SearchSqliteFollow(s string) {
 	pub58 := SearchSqliteUsername(s)
+	fmt.Println(pub58)
 	db := OpenSqliteDB()
 	defer db.Close()
 	rows, err := db.Query("select follower from user_follower where followee = '" + pub58 + "'")
