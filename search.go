@@ -22,6 +22,6 @@ func HandleSearch() {
 	} else if table == "users" {
 		lib.SearchSqliteUsers(query)
 	} else if table == "follow" {
-		lib.SearchSqliteFollow(query)
+		lib.SearchSqliteFollow("", query)
 	}
 }
