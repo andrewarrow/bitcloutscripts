@@ -40,4 +40,8 @@ rm ~/acopy/badgerdb/*.mem
 
 And now you can run:
 
+```
 ./bcs posts --dir=/full/path/to/acopy/badgerdb
+./bcs graph --dir=/full/path/to/acopy/badgerdb
+etc
+```
