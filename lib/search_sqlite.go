@@ -5,9 +5,6 @@ import (
 	"strconv"
 )
 
-var alreadyDone = map[string]bool{}
-var globalLimit int
-
 func SearchSqliteFollow(tab, s, degrees string) {
 	pub58 := SearchSqliteUsername(s)
 	db := OpenSqliteDB()
@@ -27,10 +24,6 @@ func SearchSqliteFollow(tab, s, degrees string) {
 		rows.Scan(&follower)
 		username := SearchSqlitePub58(follower)
 		fmt.Printf("%s%s\n", tab, username)
-		if alreadyDone[username] {
-			break
-		}
-		alreadyDone[username] = true
 
 		if tabSize+1 < limit {
 			SearchSqliteFollow(tab+"  ", username, degrees)
