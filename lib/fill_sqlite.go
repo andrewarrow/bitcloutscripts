@@ -32,7 +32,7 @@ func EnumerateKeysFillSqlitePosts(sdb *sql.DB, db *badger.DB, dbPrefix []byte) {
 
 			post := &PostEntry{}
 			gob.NewDecoder(bytes.NewReader(val)).Decode(post)
-			InsertPost(sdb, post)
+			InsertPost(db, sdb, post)
 			i++
 			if i%1000 == 0 {
 				fmt.Println("iteration", i)

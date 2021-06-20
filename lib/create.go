@@ -7,20 +7,22 @@ import (
 	"time"
 
 	"github.com/btcsuite/btcutil/base58"
+	"github.com/dgraph-io/badger/v3"
 )
 
-func InsertPost(db *sql.DB, post *PostEntry) {
-	tx, _ := db.Begin()
+func InsertPost(db *badger.DB, sdb *sql.DB, post *PostEntry) {
+	tx, _ := sdb.Begin()
 
 	body := string(post.Body)
 	hash := base58.Encode(post.PostHash.Bytes())
+	username := LookupUsername(db, post.PosterPublicKey)
 
-	s := `insert into posts (hash, body, created_at) values (?, ?, ?)`
+	s := `insert into posts (username, hash, body, created_at) values (?, ?, ?, ?)`
 	thing, e := tx.Prepare(s)
 	if e != nil {
 		fmt.Println(e)
 	}
-	_, e = thing.Exec(hash, body, time.Now())
+	_, e = thing.Exec(username, hash, body, time.Now())
 	if e != nil {
 		fmt.Println(e)
 	}
