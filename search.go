@@ -11,5 +11,15 @@ func HandleSearch() {
 		fmt.Println("run with --query=term")
 		return
 	}
-	lib.SearchSqlite(query)
+	table := "posts"
+
+	if argMap["table"] != "" {
+		table = "users"
+	}
+
+	if table == "posts" {
+		lib.SearchSqlitePosts(query)
+	} else if table == "users" {
+		lib.SearchSqliteUsers(query)
+	}
 }
