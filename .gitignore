@@ -1,3 +1,5 @@
 bcs
 go.sum
 vendor
+clout.db
+clout.db-journal
