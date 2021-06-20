@@ -54,3 +54,21 @@ func InsertUser(db *sql.DB, profile *ProfileEntry) {
 		fmt.Println(e)
 	}
 }
+func InsertFollowee(sdb *sql.DB, followee, follower string) {
+	tx, _ := sdb.Begin()
+
+	s := `insert into user_follower (followee, follower) values (?, ?)`
+	thing, e := tx.Prepare(s)
+	if e != nil {
+		fmt.Println(e)
+	}
+	_, e = thing.Exec(followee, follower)
+	if e != nil {
+		fmt.Println(e)
+	}
+
+	e = tx.Commit()
+	if e != nil {
+		fmt.Println(e)
+	}
+}
