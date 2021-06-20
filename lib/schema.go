@@ -34,6 +34,9 @@ create table users (bio text, username text, pub58 text, created_at datetime);
 CREATE UNIQUE INDEX users_idx
   ON users (pub58);
 
+CREATE INDEX users_username_idx
+  ON users (username);
+
 create table user_follower (followee text, follower text);
 
 CREATE INDEX uf_followee_idx

@@ -14,12 +14,14 @@ func HandleSearch() {
 	table := "posts"
 
 	if argMap["table"] != "" {
-		table = "users"
+		table = argMap["table"]
 	}
 
 	if table == "posts" {
 		lib.SearchSqlitePosts(query)
 	} else if table == "users" {
 		lib.SearchSqliteUsers(query)
+	} else if table == "follow" {
+		lib.SearchSqliteFollow(query)
 	}
 }
