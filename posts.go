@@ -1,8 +1,10 @@
 package main
 
 import (
+	"bcs/files"
 	"bcs/lib"
 	"fmt"
+	"strings"
 )
 
 func DirCheck() string {
@@ -10,6 +12,10 @@ func DirCheck() string {
 	if dir == "" {
 		fmt.Println("run with --dir=/home/name/path/to/badgerdb")
 		return ""
+	}
+	if strings.HasPrefix(dir, "~") {
+		home := files.UserHomeDir()
+		return home + dir[1:]
 	}
 	return dir
 }
