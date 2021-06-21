@@ -5,7 +5,9 @@ type StakeEntryStats struct {
 
 const HashSizeBytes = 32
 
+type PKID [33]byte
 type BlockHash [HashSizeBytes]byte
+
 type StakeEntry struct {
 }
 
@@ -60,4 +62,12 @@ type ProfileEntry struct {
 	StakeMultipleBasisPoints uint64
 	StakeEntry               *StakeEntry
 	stakeStats               *StakeEntryStats
+}
+
+type DiamondEntry struct {
+	SenderPKID      *PKID
+	ReceiverPKID    *PKID
+	DiamondPostHash *BlockHash
+	DiamondLevel    int64
+	isDeleted       bool
 }
